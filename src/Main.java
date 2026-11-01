@@ -31,7 +31,7 @@ public class Main {
             } else if (choice == 2) {
                 customer.customerMenu();
             } else if (choice == 3) {
-                System.out.println("Thank you for using the system!");
+                System.out.println("Thank you for ordering!");
             } else {
                 System.out.println("Invalid choice.");
             }
