@@ -1,5 +1,7 @@
-package src;
+package src.presentation;
 import java.util.Scanner;
+
+import src.model.FoodMenu;
 
 public class Owner{
     private Scanner input;

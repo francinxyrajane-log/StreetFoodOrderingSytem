@@ -1,6 +1,8 @@
-package src;
+package src.presentation;
 
 import java.util.Scanner;
+
+import src.model.FoodMenu;
 
 public class Customer {
     private Scanner input;

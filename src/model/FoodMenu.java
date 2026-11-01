@@ -1,4 +1,4 @@
-package src;
+package src.model;
 
 public class FoodMenu {
     private Food[] foods = new Food[50];
