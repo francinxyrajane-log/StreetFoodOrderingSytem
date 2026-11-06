@@ -1,4 +1,4 @@
-package src.model;
+/* 
 
 public class Food {
     private String name;
@@ -32,3 +32,4 @@ public class Food {
         System.out.println("Price: ₱" + price);
     }
 }
+    */

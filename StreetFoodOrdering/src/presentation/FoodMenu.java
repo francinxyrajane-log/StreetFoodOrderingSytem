@@ -1,7 +1,8 @@
-package src.model;
+package StreetFoodOrdering.src.presentation;
 
 public class FoodMenu {
-    private Food[] foods = new Food[50];
+
+/*  private Food[] foods = new Food[50];
     private int count = 0;
 
     public FoodMenu(){
@@ -81,4 +82,6 @@ public class FoodMenu {
     public int getCount(){
         return count;
     }
+        */
 }
+

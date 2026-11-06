@@ -1,5 +1,5 @@
-package src.presentation;
 
+/* 
 import java.util.Scanner;
 
 import src.model.FoodMenu;
@@ -21,7 +21,7 @@ public class Customer {
             System.out.println("1. View Food Menu");
             System.out.println("2. Order Food");
             System.out.println("3. Back to Main Menu");
-            System.out.print("Enter choice: ");
+    s        System.out.print("Enter choice: ");
 
             choice = input.nextInt();
             input.nextLine();
@@ -77,3 +77,4 @@ public class Customer {
         System.out.println("Thank you for ordering!");
     }
 }
+    */

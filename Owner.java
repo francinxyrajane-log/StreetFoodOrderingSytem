@@ -1,4 +1,4 @@
-package src.presentation;
+/* 
 import java.util.Scanner;
 
 import src.model.FoodMenu;
@@ -99,3 +99,4 @@ public class Owner{
         }while(choice !=5);
     }
 }
+    */
