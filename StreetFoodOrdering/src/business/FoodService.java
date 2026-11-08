@@ -1,11 +1,10 @@
 package StreetFoodOrdering.src.business;
-
-import StreetFoodOrdering.src.presentation.FoodMenu;
+import java.util.List;
 import StreetFoodOrdering.src.model.FoodItem;
 import StreetFoodOrdering.src.data.FoodRepositorySystem;
 
 public class FoodService {
-   
+
     //repository used to access food records
     private FoodRepositorySystem foodRepositorySystem;
 
@@ -14,37 +13,60 @@ public class FoodService {
         this.foodRepositorySystem = foodRepositorySystem;
     }
 
-    // add anew food item
-    public void addFood(FoodItem food){
-
-            //check if food name is empty
-        if(food.getFoodName() == null || food.getFoodName().trim().isEmpty()){
-            System.out.print("Food name connot be empty! ");
-            return;
+    //adds a food item after checking
+    public boolean addFood(FoodItem food){
+        if(food == null){
+            return false;
         }
-            //check if the price is valid
+        if (food.getFoodName() == null || food.getFoodName().trim().isEmpty()){
+            return false;
+        }
         if(food.getPrice() <= 0){
-        System.out.println("Price must be greater than zero!");
-        return;
+            return false;
         }
-             //save the food item
-        System.out.println("Food added successfully!");
+
+        //prevent duplicate foodId's
+        if(foodRepositorySystem.findFoodByID(food.getFoodID())!= null){
+            return false;
+        }
+            
+            foodRepositorySystem.addFood(food);
+            return true;
     }
 
-    /*  
-    public void displayAllFood(){
-        //get all food items from the repository
-        for (FoodItem food : foodRepository.GetAllFoods()){
-            System.out.println("Food ID : " + food.getFoodID());
-            System.out.println("Food Name : " + food.getFoodName());
-            System.out.println("Price : "+ food.getPrice());
-            System.out.println();
-        }
+    //gets all availeble food records
+    public List<FoodItem> getAllFoods(){
+        return foodRepositorySystem.getAllFoods();
     }
 
-    //search for a food item using its id
-    public FoodItem findBodyId(int foodID){
-        for(foodItem food : food)
+    //finds a food item by its ID
+    public FoodItem findFoodByID(int foodID){
+        return foodRepositorySystem.findFoodByID(foodID);
     }
-        */
+
+    //validates and update a food item
+    public boolean updateFood(FoodItem food){
+
+        if(food == null){
+            return false;
+        }
+        if(food.getFoodName() == null || food.getFoodName().trim().isEmpty()){
+           return false;
+        }
+        if(food.getPrice() <= 0){
+            return false;
+        }
+            return foodRepositorySystem.updateFood(food);
+    }
+
+    //delete food item
+    public boolean deleteFood(int foodID){
+        return foodRepositorySystem.deleteFood(foodID);
+    }
+
+    //gets the total number of food items
+    public int getFoodCount(){
+        return foodRepositorySystem.getFoodCount();
+    }
+    
 }
