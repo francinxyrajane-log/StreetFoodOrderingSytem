@@ -5,7 +5,7 @@ public class FoodItem {
     private String foodName;
     private double price;
 
-    public FoodItem(int FoodId, String foodName, double price){
+    public FoodItem(int foodID, String foodName, double price){
         this.foodID = foodID;
         this.foodName = foodName;
         this.price = price;
