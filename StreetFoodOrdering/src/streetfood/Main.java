@@ -1,40 +1,61 @@
 
+
 package StreetFoodOrdering.src.streetfood;
 
 import java.util.Scanner;
 
+// Data
 import StreetFoodOrdering.src.data.FoodRepositorySystem;
 import StreetFoodOrdering.src.data.InMemoryFoodRepository;
+import StreetFoodOrdering.src.data.OrderRepository;
+import StreetFoodOrdering.src.data.InMemoryOrderRepository;
+
+// Business
 import StreetFoodOrdering.src.business.FoodService;
+import StreetFoodOrdering.src.business.OrderService;
+
+// Presentation
 import StreetFoodOrdering.src.presentation.FoodMenu;
+import StreetFoodOrdering.src.presentation.ViewFoodMenu;
+import StreetFoodOrdering.src.presentation.OrderMenu;
 import StreetFoodOrdering.src.presentation.MainMenu;
-import StreetFoodOrdering.src.presentation.ViewFoodMenu;;
 
 public class Main {
 
     public static void main(String[] args) {
-       
-        // Creates one Scanner for user input.
+
         Scanner input = new Scanner(System.in);
 
-        // Creates the food repository for storing food records.
-        FoodRepositorySystem foodRepository = new InMemoryFoodRepository();
+        // Food setup
+        FoodRepositorySystem foodRepository =
+                new InMemoryFoodRepository();
 
-        // Connects the repository to the business logic.
-        FoodService foodService = new FoodService(foodRepository);
+        FoodService foodService =
+                new FoodService(foodRepository);
 
-        // Creates the food management menu.
-        FoodMenu foodMenu = new FoodMenu(input, foodService);
-        ViewFoodMenu viewFoodMenu = new ViewFoodMenu(foodService);
+        // Order setup
+        OrderRepository orderRepository =
+                new InMemoryOrderRepository();
 
-        // Creates the main menu.
-        MainMenu mainMenu = new MainMenu(input, foodMenu, viewFoodMenu);
+        OrderService orderService =
+                new OrderService(orderRepository);
 
-        // Starts the application.
+        // Menu setup
+        FoodMenu foodMenu =
+                new FoodMenu(input, foodService);
+
+        ViewFoodMenu viewFoodMenu =
+                new ViewFoodMenu(foodService);
+
+        OrderMenu orderMenu =
+                new OrderMenu(input, foodService, orderService);
+
+        // Main menu
+        MainMenu mainMenu =
+                new MainMenu(input, foodMenu, viewFoodMenu, orderMenu);
+
         mainMenu.displayMenu();
 
         input.close();
-        
     }
-        
 }
