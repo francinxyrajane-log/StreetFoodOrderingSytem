@@ -14,8 +14,7 @@ public class OrderMenu {
     private OrderService orderService;
     private ReceiptView receiptView;
 
-    public OrderMenu(Scanner input, FoodService foodService,
-                     OrderService orderService, ReceiptView receiptView) {
+    public OrderMenu(Scanner input, FoodService foodService, OrderService orderService) {
         this.input = input;
         this.foodService = foodService;
         this.orderService = orderService;

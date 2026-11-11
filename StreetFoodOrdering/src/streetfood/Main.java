@@ -20,7 +20,6 @@ import StreetFoodOrdering.src.presentation.ViewFoodMenu;
 import StreetFoodOrdering.src.presentation.OrderMenu;
 import StreetFoodOrdering.src.presentation.MainMenu;
 import StreetFoodOrdering.src.presentation.OrderHistory;
-import StreetFoodOrdering.src.presentation.MainMenu;
 
 public class Main {
 
@@ -29,34 +28,21 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         // Food setup
-        FoodRepositorySystem foodRepository =
-                new InMemoryFoodRepository();
-
-        FoodService foodService =
-                new FoodService(foodRepository);
+        FoodRepositorySystem foodRepository = new InMemoryFoodRepository();
+        FoodService foodService = new FoodService(foodRepository);
 
         // Order setup
-        OrderRepository orderRepository =
-                new InMemoryOrderRepository();
-
-        OrderService orderService =
-                new OrderService(orderRepository);
+        OrderRepository orderRepository = new InMemoryOrderRepository();
+        OrderService orderService = new OrderService(orderRepository);
 
         // Menu setup
-        FoodMenu foodMenu =
-                new FoodMenu(input, foodService);
-
-        ViewFoodMenu viewFoodMenu =
-                new ViewFoodMenu(foodService);
-
-        OrderMenu orderMenu =
-                new OrderMenu(input, foodService, orderService);
-        
+        FoodMenu foodMenu = new FoodMenu(input, foodService);
+        ViewFoodMenu viewFoodMenu = new ViewFoodMenu(foodService);
+       OrderMenu orderMenu = new OrderMenu(input, foodService, orderService);
         OrderHistory orderHistory = new OrderHistory(orderService);
 
         // Main menu
-        MainMenu mainMenu =
-                new MainMenu(input, foodMenu, viewFoodMenu, orderMenu, orderHistory);
+        MainMenu mainMenu = new MainMenu(input, foodMenu, viewFoodMenu, orderMenu, orderHistory);
 
         mainMenu.displayMenu();
 
