@@ -19,6 +19,8 @@ import StreetFoodOrdering.src.presentation.FoodMenu;
 import StreetFoodOrdering.src.presentation.ViewFoodMenu;
 import StreetFoodOrdering.src.presentation.OrderMenu;
 import StreetFoodOrdering.src.presentation.MainMenu;
+import StreetFoodOrdering.src.presentation.OrderHistory;
+import StreetFoodOrdering.src.presentation.MainMenu;
 
 public class Main {
 
@@ -49,10 +51,12 @@ public class Main {
 
         OrderMenu orderMenu =
                 new OrderMenu(input, foodService, orderService);
+        
+        OrderHistory orderHistory = new OrderHistory(orderService);
 
         // Main menu
         MainMenu mainMenu =
-                new MainMenu(input, foodMenu, viewFoodMenu, orderMenu);
+                new MainMenu(input, foodMenu, viewFoodMenu, orderMenu, orderHistory);
 
         mainMenu.displayMenu();
 
