@@ -12,12 +12,14 @@ public class OrderMenu {
     private Scanner input;
     private FoodService foodService;
     private OrderService orderService;
+    private ReceiptView receiptView;
 
     public OrderMenu(Scanner input, FoodService foodService,
-                     OrderService orderService) {
+                     OrderService orderService, ReceiptView receiptView) {
         this.input = input;
         this.foodService = foodService;
         this.orderService = orderService;
+        this.receiptView = receiptView;
     }
 
     public void displayOrderMenu() {
@@ -96,10 +98,8 @@ public class OrderMenu {
         } while (addMore.equalsIgnoreCase("Y"));
 
         if (orderService.createOrder(order)) {
-            System.out.println("\nOrder placed successfully!");
-            System.out.println("Order ID: " + order.getOrderID());
-            System.out.printf("Total Amount: ₱%.2f%n",
-                    order.getTotalAmount());
+           System.out.println("\nOrder placed successfully!");
+            receiptView.displayReceipt(order);
         } else {
             System.out.println("\nFailed to place order!");
         }
