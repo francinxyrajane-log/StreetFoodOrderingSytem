@@ -8,12 +8,14 @@ public class MainMenu {
     private Scanner input;
     private FoodMenu foodMenu;
     private ViewFoodMenu viewFoodMenu;
+    private OrderMenu orderMenu;
 
     // Receives the Scanner and FoodMenu from Main.
-    public MainMenu(Scanner input, FoodMenu foodMenu, ViewFoodMenu viewFoodMenu) {
+    public MainMenu(Scanner input, FoodMenu foodMenu, ViewFoodMenu viewFoodMenu, OrderMenu orderMenu) {
         this.input = input;
         this.foodMenu = foodMenu;
         this.viewFoodMenu = viewFoodMenu;
+        this.orderMenu = orderMenu;
     }
 
     // Displays the main menu.
@@ -47,7 +49,7 @@ public class MainMenu {
                     viewFoodMenu.displayFoodMenu();
                     break;
                 case 3:
-                    System.out.println("\nOpening Place Order...");
+                    orderMenu.displayOrderMenu();
                     break;
                 case 4:
                     System.out.println("\nOpening View Orders...");
