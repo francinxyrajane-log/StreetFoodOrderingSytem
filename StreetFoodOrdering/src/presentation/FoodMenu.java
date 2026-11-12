@@ -60,8 +60,22 @@ public class FoodMenu {
     private void addFood() {
         System.out.println("\n--- ADD FOOD ---");
 
-        System.out.print("Enter Food ID: ");
-        int id = readInt();
+        int id;
+
+        // Check if the Food ID already exists.
+        while (true) {
+            System.out.print("Enter Food ID: ");
+            id = readInt();
+
+            if (id <= 0) {
+                System.out.println("\nFood ID must be greater than 0!");
+            } else if (foodService.findFoodByID(id) != null) {
+                System.out.println("\nFood ID already exists!");
+                System.out.println("Please enter another ID.");
+            } else {
+                break;
+            }
+        }
 
         System.out.print("Enter Food Name: ");
         String name = input.nextLine();
