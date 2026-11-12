@@ -25,6 +25,8 @@ public class OrderMenu {
         int choice;
 
         do {
+            ConsoleHelper.clearScreen();
+
             System.out.println("\n===================================");
             System.out.println("           ORDER MENU");
             System.out.println("===================================");
@@ -44,6 +46,10 @@ public class OrderMenu {
                     break;
                 default:
                     System.out.println("\nInvalid choice!");
+            }
+
+            if (choice != 5) {
+                ConsoleHelper.pause(input);
             }
 
         } while (choice != 2);

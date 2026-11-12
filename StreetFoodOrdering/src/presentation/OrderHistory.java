@@ -14,6 +14,9 @@ public class OrderHistory {
     }
 
     public void displayOrderHistory() {
+
+       // ConsoleHelper.clearScreen();
+
         System.out.println("\n===================================");
         System.out.println("           ORDER HISTORY");
         System.out.println("===================================");
@@ -42,6 +45,8 @@ public class OrderHistory {
 
         System.out.println("===================================");
         System.out.println("Total Orders: " + orderService.getOrderCount());
+
+        ConsoleHelper.clearScreen();
     }
 }
 

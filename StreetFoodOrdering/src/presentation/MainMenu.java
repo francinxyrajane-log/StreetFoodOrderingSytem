@@ -25,6 +25,8 @@ public class MainMenu {
         int choice = 0;
 
         do {
+            ConsoleHelper.clearScreen();
+
             System.out.println("\n===================================");
             System.out.println("   STREET FOOD MANAGEMENT SYSTEM");
             System.out.println("===================================");
@@ -61,6 +63,10 @@ public class MainMenu {
                     break;
                 default:
                     System.out.println("\nInvalid choice! Please try again.");
+            }
+
+            if (choice != 5) {
+                ConsoleHelper.pause(input);
             }
 
         } while (choice != 5);
