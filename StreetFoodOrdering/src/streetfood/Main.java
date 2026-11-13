@@ -12,7 +12,7 @@ import StreetFoodOrdering.src.presentation.MainMenu;
 public class Main {
 
     public static void main(String[] args) {
-
+       
         // Creates one Scanner for user input.
         Scanner input = new Scanner(System.in);
 
@@ -32,5 +32,7 @@ public class Main {
         mainMenu.displayMenu();
 
         input.close();
+        
     }
+        
 }
