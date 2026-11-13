@@ -7,11 +7,13 @@ public class MainMenu {
 
     private Scanner input;
     private FoodMenu foodMenu;
+    private ViewFoodMenu viewFoodMenu;
 
     // Receives the Scanner and FoodMenu from Main.
-    public MainMenu(Scanner input, FoodMenu foodMenu) {
+    public MainMenu(Scanner input, FoodMenu foodMenu, ViewFoodMenu viewFoodMenu) {
         this.input = input;
         this.foodMenu = foodMenu;
+        this.viewFoodMenu = viewFoodMenu;
     }
 
     // Displays the main menu.
@@ -42,7 +44,7 @@ public class MainMenu {
                     foodMenu.displayFoodManagement();
                     break;
                 case 2:
-                    System.out.println("\nOpening View Food Menu...");
+                    viewFoodMenu.displayFoodMenu();
                     break;
                 case 3:
                     System.out.println("\nOpening Place Order...");
