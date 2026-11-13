@@ -7,6 +7,8 @@ import StreetFoodOrdering.src.model.OrderItem;
 
 public class OrderService {
 
+    private OrderRepositorySystem orderRepository;
+
     public OrderService(OrderRepositorySystem orderRepository) {
         this.orderRepository = orderRepository;
     }
@@ -62,5 +64,6 @@ public class OrderService {
 
         return true;
     }
-
 }
+
+
