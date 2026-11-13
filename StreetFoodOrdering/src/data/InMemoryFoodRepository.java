@@ -19,7 +19,7 @@ public class InMemoryFoodRepository implements FoodRepositorySystem {
     // Gets all food items
     @Override
     public List<FoodItem> getAllFoods() {
-        return foodList;
+        return new ArrayList<>(foodList);
     }
 
     // Finds a food item using its ID
