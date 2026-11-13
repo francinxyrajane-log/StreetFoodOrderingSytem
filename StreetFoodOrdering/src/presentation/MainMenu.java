@@ -10,14 +10,16 @@ public class MainMenu {
     private ViewFoodMenu viewFoodMenu;
     private OrderMenu orderMenu;
     private OrderHistory orderHistory;
+    private PaymentMenu paymentMenu;
 
     // Receives the Scanner and FoodMenu from Main.
-    public MainMenu(Scanner input, FoodMenu foodMenu, ViewFoodMenu viewFoodMenu, OrderMenu orderMenu, OrderHistory orderHistory) {
+    public MainMenu(Scanner input, FoodMenu foodMenu, ViewFoodMenu viewFoodMenu, OrderMenu orderMenu, OrderHistory orderHistory, PaymentMenu paymentMenu) {
         this.input = input;
         this.foodMenu = foodMenu;
         this.viewFoodMenu = viewFoodMenu;
         this.orderMenu = orderMenu;
         this.orderHistory = orderHistory;
+        this.paymentMenu = paymentMenu;
     }
 
     // Displays the main menu.
@@ -34,7 +36,8 @@ public class MainMenu {
             System.out.println("2. View Food Menu");
             System.out.println("3. Place Order");
             System.out.println("4. View Orders");
-            System.out.println("5. Exit");
+            System.out.println("5. Payment");
+            System.out.println("6. Exit");
             System.out.println("===================================");
             System.out.print("Enter your choice: ");
 
@@ -59,16 +62,19 @@ public class MainMenu {
                     orderHistory.displayOrderHistory();
                     break;
                 case 5:
+                    paymentMenu.displayPaymentMenu();
+                    break;
+                case 6:
                     System.out.println("\nThank you for using the system!");
                     break;
                 default:
                     System.out.println("\nInvalid choice! Please try again.");
             }
 
-            if (choice != 5) {
+            if (choice != 6) {
                 ConsoleHelper.pause(input);
             }
 
-        } while (choice != 5);
+        } while (choice != 6);
     }
 }
