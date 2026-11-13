@@ -10,8 +10,6 @@ public class ConsoleHelper {
         System.out.flush();
     }
 
-    
-
     // Pauses the program until Enter is pressed.
     public static void pause(Scanner input) {
         System.out.print("\nPress Enter to continue...");
