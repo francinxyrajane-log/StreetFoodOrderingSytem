@@ -8,6 +8,7 @@ import StreetFoodOrdering.src.data.InMemoryFoodRepository;
 import StreetFoodOrdering.src.business.FoodService;
 import StreetFoodOrdering.src.presentation.FoodMenu;
 import StreetFoodOrdering.src.presentation.MainMenu;
+import StreetFoodOrdering.src.presentation.ViewFoodMenu;;
 
 public class Main {
 
@@ -24,9 +25,10 @@ public class Main {
 
         // Creates the food management menu.
         FoodMenu foodMenu = new FoodMenu(input, foodService);
+        ViewFoodMenu viewFoodMenu = new ViewFoodMenu(foodService);
 
         // Creates the main menu.
-        MainMenu mainMenu = new MainMenu(input, foodMenu);
+        MainMenu mainMenu = new MainMenu(input, foodMenu, viewFoodMenu);
 
         // Starts the application.
         mainMenu.displayMenu();
