@@ -7,39 +7,60 @@ import StreetFoodOrdering.src.model.OrderItem;
 
 public class OrderService {
 
-    //attributes
-    private int orderID;
-    private List<OrderItem> orderItems;
-
-    //constructor
-    public Order(int orderID){
-        this.orderID = orderID;
-        this.orderItems = new ArrayList<>();
-
+    public OrderService(OrderRepositorySystem orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
-    //getters
-    public int getOrderID(){
-        return orderID;
+    // Creates a new order.
+    public boolean createOrder(Order order) {
+        if (!isValidOrder(order)) {
+            return false;
+        }
+
+        if (orderRepository.findOrderByID(order.getOrderID()) != null) {
+            return false;
+        }
+
+        orderRepository.addOrder(order);
+        return true;
     }
 
-    public List<OrderItem> getOrderItems(){
-        return orderItems;
+    // Returns all orders.
+    public List<Order> getAllOrders() {
+        return orderRepository.getAllOrders();
     }
 
-    //adds an item to the order
-    public void addOrderItem(OrderItem item){
-        orderItems.add(item);
+    // Finds an order using its ID.
+    public Order findOrderByID(int orderID) {
+        return orderRepository.findOrderByID(orderID);
     }
 
-    //calculatesnthe total amount
-    public double getTotalAmount(){
-       double total = 0;
+    // Deletes an order.
+    public boolean deleteOrder(int orderID) {
+        return orderRepository.deleteOrder(orderID);
+    }
 
-       for(OrderItem item : orderItems){
-        total += item.getSubtotal();
-       }
-       return total;
+    // Returns the total number of orders.
+    public int getOrderCount() {
+        return orderRepository.getOrderCount();
+    }
+
+    // Checks if the order contains valid details.
+    private boolean isValidOrder(Order order) {
+        if (order == null || order.getOrderID() <= 0
+                || order.getOrderItems() == null
+                || order.getOrderItems().isEmpty()) {
+            return false;
+        }
+
+        for (OrderItem item : order.getOrderItems()) {
+            if (item == null || item.getFoodItem() == null
+                    || item.getQuantity() <= 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
