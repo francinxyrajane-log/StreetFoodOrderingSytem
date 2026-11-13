@@ -5,18 +5,19 @@ import StreetFoodOrdering.src.model.Order;
 
 public class OrderRepository {
 
-    //adds a new order
+    // Adds a new order.
     void addOrder(Order order);
 
-    //returns all orders
+    // Returns all orders.
     List<Order> getAllOrders();
 
-    //finds an order using its ID
+    // Finds an order using its ID.
     Order findOrderByID(int orderID);
 
-    //deletes an order using its id
+    // Deletes an order using its ID.
     boolean deleteOrder(int orderID);
 
-    //Returns the total number of orders
+    // Returns the total number of orders.
     int getOrderCount();
 }
+
