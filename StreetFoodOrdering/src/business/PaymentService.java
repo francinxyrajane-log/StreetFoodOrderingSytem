@@ -1,64 +1,55 @@
-
 package StreetFoodOrdering.src.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import StreetFoodOrdering.src.data.PaymentRepository;
 import StreetFoodOrdering.src.model.Payment;
 
 public class PaymentService {
 
-    private List<Payment> paymentList = new ArrayList<>();
+    private PaymentRepository paymentRepository;
+
+    // Constructor
+    public PaymentService(PaymentRepository paymentRepository) {
+        this.paymentRepository = paymentRepository;
+    }
 
     // Processes a payment.
     public boolean processPayment(Payment payment) {
-
         if (!isValidPayment(payment)) {
             return false;
         }
 
-        // Prevent duplicate Payment IDs.
-        if (findPaymentByID(payment.getPaymentID()) != null) {
+        if (paymentRepository.findPaymentByID(payment.getPaymentID()) != null) {
             return false;
         }
 
-        paymentList.add(payment);
+        paymentRepository.addPayment(payment);
         return true;
     }
 
     // Returns all payments.
     public List<Payment> getAllPayments() {
-        return new ArrayList<>(paymentList);
+        return paymentRepository.getAllPayments();
     }
 
-    // Finds a payment using its ID.
+    // Finds payment by ID.
     public Payment findPaymentByID(int paymentID) {
-        for (Payment payment : paymentList) {
-            if (payment.getPaymentID() == paymentID) {
-                return payment;
-            }
-        }
-        return null;
+        return paymentRepository.findPaymentByID(paymentID);
     }
 
-    // Finds a payment using its Order ID.
+    // Finds payment by Order ID.
     public Payment findPaymentByOrderID(int orderID) {
-        for (Payment payment : paymentList) {
-            if (payment.getOrderID() == orderID) {
-                return payment;
-            }
-        }
-        return null;
+        return paymentRepository.findPaymentByOrderID(orderID);
     }
 
-    // Returns the number of payments.
+    // Returns the total number of payments.
     public int getPaymentCount() {
-        return paymentList.size();
+        return paymentRepository.getPaymentCount();
     }
 
     // Validates payment information.
     private boolean isValidPayment(Payment payment) {
-
         return payment != null
                 && payment.getPaymentID() > 0
                 && payment.getOrderID() > 0
@@ -67,7 +58,8 @@ public class PaymentService {
                 && payment.getAmountPaid() > 0
                 && payment.getTotalAmount() > 0
                 && payment.getAmountPaid() >= payment.getTotalAmount()
-                && findPaymentByOrderID(payment.getOrderID()) == null;
+                && paymentRepository.findPaymentByOrderID(payment.getOrderID()) == null;
     }
 }
+
 
