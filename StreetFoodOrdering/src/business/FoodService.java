@@ -68,5 +68,14 @@ public class FoodService {
     public int getFoodCount(){
         return foodRepositorySystem.getFoodCount();
     }
+
+    // Checks whether the food details are valid.
+    private boolean isValidFood(FoodItem food) {
+        return food != null
+                && food.getFoodID() > 0
+                && food.getFoodName() != null
+                && !food.getFoodName().trim().isEmpty()
+                && food.getPrice() > 0;
+    }
     
 }
