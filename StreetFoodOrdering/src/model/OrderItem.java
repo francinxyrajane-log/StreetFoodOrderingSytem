@@ -1,24 +1,28 @@
 package StreetFoodOrdering.src.model;
 
+
 public class OrderItem {
-    // Attributes
+
+     // Attributes
     private FoodItem foodItem;
     private int quantity;
 
-        // Constructor
+    // Constructor
     public OrderItem(FoodItem foodItem, int quantity) {
         this.foodItem = foodItem;
         this.quantity = quantity;
     }
 
-    //getters
+    // Getters
     public FoodItem getFoodItem() {
         return foodItem;
     }
+
     public int getQuantity() {
         return quantity;
     }
-    //setters
+
+    // Setters
     public void setFoodItem(FoodItem foodItem) {
         this.foodItem = foodItem;
     }
@@ -27,7 +31,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    // Calculates the subtotal
+    // Calculates the subtotal.
     public double getSubtotal() {
         return foodItem.getPrice() * quantity;
     }
