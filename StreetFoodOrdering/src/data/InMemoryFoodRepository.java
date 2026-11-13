@@ -7,6 +7,7 @@ import StreetFoodOrdering.src.model.FoodItem;
 
 public class InMemoryFoodRepository implements FoodRepositorySystem {
 
+   
     // Stores all food records
     private List<FoodItem> foodList = new ArrayList<>();
 
@@ -69,5 +70,6 @@ public class InMemoryFoodRepository implements FoodRepositorySystem {
     public int getFoodCount() {
         return foodList.size();
     }
+        
 }
 
