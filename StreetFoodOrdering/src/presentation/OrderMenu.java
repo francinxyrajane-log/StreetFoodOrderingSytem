@@ -21,6 +21,7 @@ public class OrderMenu {
         this.receiptView = new ReceiptView();
     }
 
+    //display orer menu
     public void displayOrderMenu() {
         int choice;
 
@@ -28,7 +29,7 @@ public class OrderMenu {
             ConsoleHelper.clearScreen();
 
             System.out.println("\n===================================");
-            System.out.println("           ORDER MENU");
+            System.out.println("             ORDER MENU");
             System.out.println("===================================");
             System.out.println("1. Place Order");
             System.out.println("2. Back");
@@ -36,6 +37,9 @@ public class OrderMenu {
             System.out.print("Enter your choice: ");
 
             choice = readInt();
+
+            // Clear screen after entering a choice.
+            ConsoleHelper.clearScreen();
 
             switch (choice) {
                 case 1:
@@ -45,7 +49,7 @@ public class OrderMenu {
                     System.out.println("\nReturning to Main Menu...");
                     break;
                 default:
-                    System.out.println("\nInvalid choice!");
+                    System.out.println("\nInvalid choice! Please select 1 or 2.");
             }
 
             if (choice != 2) {
@@ -55,6 +59,8 @@ public class OrderMenu {
         } while (choice != 2);
     }
 
+    
+    //Place order
     private void placeOrder() {
         if (foodService.getAllFoods().isEmpty()) {
             System.out.println("\nNo food items available!");
@@ -66,14 +72,28 @@ public class OrderMenu {
         String addMore = "Y";
 
         do {
-            System.out.println("\n--- AVAILABLE FOODS ---");
+            System.out.println("\n==================== AVAILABLE FOODS ====================");
+
+            System.out.printf("%-8s %-25s %12s%n",
+                      "ID", "FOOD NAME", "PRICE");
+
+            System.out.println("---------------------------------------------------------");
 
             for (FoodItem food : foodService.getAllFoods()) {
-                System.out.printf("ID: %d | %s | ₱%.2f%n",
-                        food.getFoodID(),
-                        food.getFoodName(),
-                        food.getPrice());
+
+                String name = food.getFoodName();
+
+                if (name.length() > 25) {
+                    name = name.substring(0, 22) + "...";
+                }
+
+                System.out.printf("%-8d %-25s PHP %8.2f%n",
+                    food.getFoodID(),
+                name,
+                food.getPrice());
             }
+            System.out.println("=========================================================");
+
 
             System.out.print("\nEnter Food ID: ");
             int foodID = readInt();
@@ -97,10 +117,11 @@ public class OrderMenu {
 
             System.out.println("\nFood added to order!");
 
-            System.out.print("Add another food? (Y/N): ");
-            addMore = input.nextLine();
+           System.out.print("\nAdd another food? (Yes/No): ");
+           addMore = readYesNo() ? "Y" : "N";  
 
         } while (addMore.equalsIgnoreCase("Y"));
+
 
         if (orderService.createOrder(order)) {
            System.out.println("\nOrder placed successfully!");
@@ -110,6 +131,29 @@ public class OrderMenu {
         }
     }
 
+
+    // Reads Yes or No input.
+    private boolean readYesNo() {
+        while (true) {
+            String answer = input.nextLine().trim();
+
+            if (answer.equalsIgnoreCase("Y")
+                    || answer.equalsIgnoreCase("Yes")) {
+                return true;
+            }
+
+            if (answer.equalsIgnoreCase("N")
+                    || answer.equalsIgnoreCase("No")) {
+                return false;
+            }
+
+            System.out.println("\nInvalid input! Please enter Yes or No.");
+            System.out.print("Try again: ");
+        }
+    }
+
+
+    //Order ID
     private int generateOrderID() {
         int orderID = 1;
 
@@ -122,12 +166,15 @@ public class OrderMenu {
         return orderID;
     }
 
+
+    // Reads a valid whole number.
     private int readInt() {
         while (true) {
             try {
-                return Integer.parseInt(input.nextLine());
+                return Integer.parseInt(input.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Enter a number: ");
+                System.out.println("\nInvalid input! Please enter numbers only.");
+                System.out.print("\nEnter Food ID again : ");
             }
         }
     }

@@ -1,4 +1,3 @@
-
 package StreetFoodOrdering.src.presentation;
 
 import java.util.Scanner;
@@ -47,6 +46,9 @@ public class MainMenu {
                 System.out.println("\nInvalid input! Please enter a number.");
                 continue;
             }
+
+            // Clear screen after entering a valid number.
+            ConsoleHelper.clearScreen();
 
             switch (choice) {
                 case 1:
