@@ -33,7 +33,8 @@ public class FoodMenu {
             System.out.println("===================================");
             System.out.print("Enter your choice: ");
 
-            choice = readInt();
+            choice = readFoodID();
+            ConsoleHelper.clearScreen();
 
             switch (choice) {
                 case 1:
@@ -62,6 +63,7 @@ public class FoodMenu {
         } while (choice != 5);
     }
 
+
     // Adds a new food item.
     private void addFood() {
         System.out.println("\n--- ADD FOOD ---");
@@ -71,20 +73,19 @@ public class FoodMenu {
         // Check if the Food ID already exists.
         while (true) {
             System.out.print("Enter Food ID: ");
-            id = readInt();
+            id = readFoodID();
 
             if (id <= 0) {
                 System.out.println("\nFood ID must be greater than 0!");
             } else if (foodService.findFoodByID(id) != null) {
                 System.out.println("\nFood ID already exists!");
-                System.out.println("Please enter another ID.");
+                System.out.println("\nPlease enter another ID.");
             } else {
                 break;
             }
         }
-
         System.out.print("Enter Food Name: ");
-        String name = input.nextLine();
+        String name = readFoodName  ();
 
         System.out.print("Enter Price: ");
         double price = readDouble();
@@ -98,39 +99,52 @@ public class FoodMenu {
         }
     }
 
+
+
     // Displays all available food items.
     private void viewAllFoods() {
-        System.out.println("\n--- ALL FOODS ---");
+        System.out.println("\n==================== ALL FOODS ====================");
 
         if (foodService.getAllFoods().isEmpty()) {
             System.out.println("No food items available.");
             return;
         }
+        System.out.printf("%-8s %-25s %12s%n",
+            "ID", "FOOD NAME", "PRICE");
+        System.out.println("---------------------------------------------------");
 
         for (FoodItem food : foodService.getAllFoods()) {
-            System.out.printf("ID: %d | Name: %s | Price: ₱%.2f%n",
-                    food.getFoodID(),
-                    food.getFoodName(),
-                    food.getPrice());
+             String name = food.getFoodName();
+
+            // Limit the food name to 25 characters.
+            if (name.length() > 25) {
+                name = name.substring(0, 22) + "...";
+            }
+
+            System.out.printf("%-8d %-25s PHP %8.2f%n",
+                food.getFoodID(),
+                name,
+                food.getPrice());
         }
+        System.out.println("==================================================="); 
     }
+
 
     // Updates the name and price of an existing food item.
     private void updateFood() {
-        System.out.println("\n--- UPDATE FOOD ---");
+            System.out.println("\n--- UPDATE FOOD ---");
 
-        System.out.print("Enter Food ID: ");
-        int id = readInt();
+            System.out.print("Enter Food ID: ");
+            int id = readFoodID();
 
-        FoodItem existingFood = foodService.findFoodByID(id);
+            FoodItem existingFood = foodService.findFoodByID(id);
 
         if (existingFood == null) {
             System.out.println("\nFood not found!");
             return;
         }
-
         System.out.print("Enter New Food Name: ");
-        String name = input.nextLine();
+        String name = readFoodName();
 
         System.out.print("Enter New Price: ");
         double price = readDouble();
@@ -144,12 +158,13 @@ public class FoodMenu {
         }
     }
 
+
     // Deletes a food item using its ID.
     private void deleteFood() {
         System.out.println("\n--- DELETE FOOD ---");
 
         System.out.print("Enter Food ID: ");
-        int id = readInt();
+        int id = readFoodID();
 
         if (foodService.deleteFood(id)) {
             System.out.println("\nFood deleted successfully!");
@@ -158,16 +173,46 @@ public class FoodMenu {
         }
     }
 
-    // Reads an integer and prevents invalid number input.
-    private int readInt() {
+
+    // Reads a valid food name (letters and spaces only).
+    private String readFoodName() {
+        while (true) {
+            String name = input.nextLine().trim();
+
+            if (name.isEmpty()) {
+                System.out.println("\nFood name cannot be empty!");
+            } else if (!name.matches("[a-zA-Z ]+")) {
+                System.out.println("\nInvalid food name! Letters only are allowed.");
+            } else {
+                return name;
+            }
+
+            System.out.print("\nEnter Food Name again : ");
+        }
+    }
+
+
+    // Reads a valid positive Food ID.
+    private int readFoodID() {
         while (true) {
             try {
-                return Integer.parseInt(input.nextLine());
+                int id = Integer.parseInt(input.nextLine().trim());
+
+                if (id <= 0) {
+                    System.out.println("\nInvalid Food ID! Enter a number greater than 0.");
+                    System.out.print("\nEnter ID again : ");
+                    continue;
+                }
+
+                return id;
+
             } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Enter a number: ");
+                System.out.println("\nInvalid Food ID! Numbers only are allowed.");
+                System.out.print("\nEnter ID again : ");
             }
         }
     }
+
 
     // Reads a decimal number for the food price.
     private double readDouble() {
@@ -175,7 +220,7 @@ public class FoodMenu {
             try {
                 return Double.parseDouble(input.nextLine());
             } catch (NumberFormatException e) {
-                System.out.print("Invalid price. Enter a number: ");
+                System.out.print("\nInvalid price. Enter a number: ");
             }
         }
     }

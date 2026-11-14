@@ -18,7 +18,7 @@ public class OrderMenu {
         this.input = input;
         this.foodService = foodService;
         this.orderService = orderService;
-        this.receiptView = receiptView;
+        this.receiptView = new ReceiptView();
     }
 
     public void displayOrderMenu() {
@@ -48,7 +48,7 @@ public class OrderMenu {
                     System.out.println("\nInvalid choice!");
             }
 
-            if (choice != 5) {
+            if (choice != 2) {
                 ConsoleHelper.pause(input);
             }
 
