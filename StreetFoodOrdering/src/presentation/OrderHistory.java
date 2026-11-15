@@ -1,4 +1,3 @@
-
 package StreetFoodOrdering.src.presentation;
 
 import StreetFoodOrdering.src.business.OrderService;
@@ -15,38 +14,49 @@ public class OrderHistory {
 
     public void displayOrderHistory() {
 
-       // ConsoleHelper.clearScreen();
+        ConsoleHelper.clearScreen();
 
-        System.out.println("\n===================================");
-        System.out.println("           ORDER HISTORY");
-        System.out.println("===================================");
+        System.out.println("\n================================================");
+        System.out.println("                   ORDER HISTORY");
+        System.out.println("================================================");
 
         if (orderService.getAllOrders().isEmpty()) {
-            System.out.println("No orders available.");
+            System.out.println("\nNo orders available.");
+            System.out.println("================================================");
             return;
         }
 
         for (Order order : orderService.getAllOrders()) {
 
             System.out.println("\nOrder ID: " + order.getOrderID());
-            System.out.println("-----------------------------------");
+
+            System.out.println("------------------------------------------------");
+            System.out.printf("%-22s %-5s %12s%n",
+                    "FOOD NAME", "QTY", "SUBTOTAL");
+            System.out.println("------------------------------------------------");
 
             for (OrderItem item : order.getOrderItems()) {
-                System.out.printf("%-20s x%-5d ₱%.2f%n",
-                        item.getFoodItem().getFoodName(),
+
+                String name = item.getFoodItem().getFoodName();
+
+                if (name.length() > 22) {
+                    name = name.substring(0, 19) + "...";
+                }
+
+                System.out.printf("%-22s %-5d PHP %8.2f%n",
+                        name,
                         item.getQuantity(),
                         item.getSubtotal());
             }
 
-            System.out.println("-----------------------------------");
-            System.out.printf("Total Amount: ₱%.2f%n",
-                    order.getTotalAmount());
+            System.out.println("------------------------------------------------");
+            System.out.printf("%-27s PHP %8.2f%n",
+                    "TOTAL AMOUNT:", order.getTotalAmount());
+
+            System.out.println("================================================");
         }
 
-        System.out.println("===================================");
-        System.out.println("Total Orders: " + orderService.getOrderCount());
-
-        ConsoleHelper.clearScreen();
+        System.out.println("\nTOTAL ORDERS: " + orderService.getOrderCount());
+        System.out.println("================================================");
     }
 }
-

@@ -1,4 +1,3 @@
-
 package StreetFoodOrdering.src.presentation;
 
 import StreetFoodOrdering.src.business.FoodService;
@@ -8,7 +7,6 @@ public class ViewFoodMenu {
 
     private FoodService foodService;
 
-    // Receives FoodService from Main.
     public ViewFoodMenu(FoodService foodService) {
         this.foodService = foodService;
     }
@@ -16,30 +14,37 @@ public class ViewFoodMenu {
     // Displays all available street food.
     public void displayFoodMenu() {
 
-        System.out.println("\n===================================");
-        System.out.println("       AVAILABLE FOOD MENU");
-        System.out.println("===================================");
+        ConsoleHelper.clearScreen();
+
+        System.out.println("\n==================== AVAILABLE FOOD MENU ====================");
 
         if (foodService.getAllFoods().isEmpty()) {
-            System.out.println("No Food Items Available.");
+            System.out.println("\nNo food items available.");
+            System.out.println("=============================================================");
             return;
         }
 
-        // Displays the table headings.
-        System.out.printf("%-10s %-20s %-10s%n",
-                "Food ID", "Food Name", "Price");
+        System.out.printf("%-8s %-30s %15s%n",
+                "ID", "FOOD NAME", "PRICE");
 
-        System.out.println("-------------------------------------");
+        System.out.println("-------------------------------------------------------------");
 
-        // Displays each food item.
         for (FoodItem food : foodService.getAllFoods()) {
-            System.out.printf("%-10d %-20s ₱%.2f%n",
+
+            String name = food.getFoodName();
+
+            // Shortens long food names.
+            if (name.length() > 30) {
+                name = name.substring(0, 27) + "...";
+            }
+
+            System.out.printf("%-8d %-30s PHP %10.2f%n",
                     food.getFoodID(),
-                    food.getFoodName(),
+                    name,
                     food.getPrice());
         }
-
-        System.out.println("===================================");
+ 
+        System.out.println("=============================================================");
     }
 }
 

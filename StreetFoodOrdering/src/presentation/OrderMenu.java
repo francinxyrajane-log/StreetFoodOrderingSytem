@@ -72,6 +72,8 @@ public class OrderMenu {
         String addMore = "Y";
 
         do {
+            ConsoleHelper.clearScreen();
+
             System.out.println("\n==================== AVAILABLE FOODS ====================");
 
             System.out.printf("%-8s %-25s %12s%n",
@@ -122,10 +124,13 @@ public class OrderMenu {
 
         } while (addMore.equalsIgnoreCase("Y"));
 
-
         if (orderService.createOrder(order)) {
+
+           ConsoleHelper.clearScreen();
            System.out.println("\nOrder placed successfully!");
-            receiptView.displayReceipt(order);
+           receiptView.displayReceipt(order);
+          
+           
         } else {
             System.out.println("\nFailed to place order!");
         }
@@ -148,7 +153,7 @@ public class OrderMenu {
             }
 
             System.out.println("\nInvalid input! Please enter Yes or No.");
-            System.out.print("Try again: ");
+            System.out.print("Try again : ");
         }
     }
 
